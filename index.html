@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | The Cyber Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* ---
+        Design 4: "Cyber Grid" Neon
+        - Palette: Deep space blue, electric cyan, hot pink.
+        - Typography: "Orbitron" for headings, "Roboto" for body.
+        - Layout: Full-width, immersive, grid-based.
+        - Animation: Glitch text, glowing borders, 3D tilt, animated grid.
+        - Texture: Digital grid, neon glows.
+        --- */
+
+        :root {
+            --bg-color: #0D0C1D;
+            --grid-color: rgba(0, 199, 255, 0.1);
+            --text-color: #E0E0E0;
+            --accent-cyan: #00C7FF;
+            --accent-pink: #FF007F;
+            --card-bg: rgba(23, 22, 45, 0.8);
+            --border-color: rgba(0, 199, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        #grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: pulse 10s infinite linear;
+        }
+        
+        @keyframes pulse {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 7rem 0;
+            position: relative;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--accent-cyan), 0 0 10px var(--accent-cyan);
+        }
+
+        /* --- Header --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.5rem 0;
+            background: rgba(13, 12, 29, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .main-nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        
+        .main-nav a:hover {
+            color: var(--accent-pink);
+            text-shadow: 0 0 8px var(--accent-pink);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            position: relative;
+        }
+        
+        #hero h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+        }
+        
+        .glitch {
+            position: relative;
+            color: white;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-color);
+            overflow: hidden;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--accent-pink);
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--accent-cyan), 2px 2px var(--accent-pink);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(10% 0 80% 0); } 100% { clip-path: inset(40% 0 20% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(70% 0 10% 0); } 100% { clip-path: inset(20% 0 75% 0); }
+        }
+        
+        #hero p {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Projects Section --- */
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: relative;
+            transition: transform 0.4s, box-shadow 0.4s;
+            transform-style: preserve-3d;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            box-shadow: 0 0 15px var(--accent-cyan);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-card h3 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-card p {
+            color: #B0B0B0;
+            font-size: 0.95rem;
+        }
+
+        /* --- Skills Section --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .skill-badge {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            transition: background-color 0.3s, color 0.3s, text-shadow 0.3s;
+        }
+        
+        .skill-badge:hover {
+            background-color: var(--accent-pink);
+            color: white;
+            border-color: var(--accent-pink);
+            text-shadow: 0 0 5px white;
+        }
+
+        /* --- Contact Section --- */
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            background: var(--card-bg);
+        }
+        
+        .contact-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-content p {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: var(--accent-cyan);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-socials a {
+            margin: 0 1rem;
+            color: var(--text-color);
+            opacity: 0.7;
+            transition: color 0.3s, opacity 0.3s, text-shadow 0.3s;
+        }
+        
+        .footer-socials a:hover {
+            opacity: 1;
+            color: var(--accent-pink);
+            text-shadow: 0 0 8px var(--accent-pink);
+        }
+        
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="grid-background"></div>
+
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">// YOUR_NAME</a>
+            <nav class="main-nav">
+                <a href="#projects">/projects</a>
+                <a href="#skills">/skills</a>
+                <a href="#contact">/contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="SYSTEM.ARCHITECT">SYSTEM.ARCHITECT</h1>
+                <p>// Building the digital frontier, one line of code at a time.</p>
+            </div>
+        </section>
+
+        <section id="projects" class="container">
+            <h2 class="section-title">> LOAD PROJECTS...</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/00C7FF/0D0C1D?text=NEON_DB" alt="Project 1">
+                    <h3>Project NEON_DB</h3>
+                    <p>A real-time data visualization dashboard for network traffic analysis, built with React and WebSockets.</p>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/FF007F/0D0C1D?text=CYBER_CART" alt="Project 2">
+                    <h3>Project CYBER_CART</h3>
+                    <p>A futuristic e-commerce platform API with a focus on security and scalability, powered by Node.js and GraphQL.</p>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="https://placehold.co/600x400/17162D/E0E0E0?text=GRID_RUNNER" alt="Project 3">
+                    <h3>Project GRID_RUNNER</h3>
+                    <p>An interactive terminal-based adventure game engine written in Python, designed for extensibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="container">
+            <h2 class="section-title">> SKILLSET.EXE</h2>
+            <div class="skills-container">
+                <span class="skill-badge">JavaScript ES6+</span>
+                <span class="skill-badge">TypeScript</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Node.js</span>
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Docker</span>
+                <span class="skill-badge">Kubernetes</span>
+                <span class="skill-badge">SQL</span>
+                <span class="skill-badge">NoSQL</span>
+                <span class="skill-badge">CI/CD</span>
+                <span class="skill-badge">AWS</span>
+                <span class="skill-badge">GraphQL</span>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <div class="contact-content">
+                <h2>> INITIATE_CONTACT</h2>
+                <p>Have a project, a question, or a challenge? My communication channels are open. Let's connect and build something extraordinary.</p>
+                <a href="mailto:your.email@example.com" class="contact-btn">SEND_TRANSMISSION</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-socials">
+                <a href="#"><i data-lucide="github"></i></a>
+                <a href="#"><i data-lucide="linkedin"></i></a>
+                <a href="#"><i data-lucide="file-terminal"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Lucide Icons ---
+            lucide.createIcons();
+
+            // --- 3D Tilt Effect for Project Cards ---
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const { width, height } = rect;
+                    const rotateX = (y / height - 0.5) * -15; // Invert for natural feel
+                    const rotateY = (x / width - 0.5) * 15;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
